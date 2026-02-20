@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+int main() {
+
+    int m, n;
+
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &m, &n);
+
+    int a[m][n];
+
+    // Input matrix
+    printf("Enter matrix:\n");
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    int row[m], col[n];
+
+    // Initialize with 0
+    for(int i = 0; i < m; i++)
+        row[i] = 0;
+
+    for(int j = 0; j < n; j++)
+        col[j] = 0;
+
+    // Step 1: Mark rows and columns having 0
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+
+            if(a[i][j] == 0) {
+                row[i] = 1;
+                col[j] = 1;
+            }
+        }
+    }
+
+    // Step 2: Set rows and columns to 0
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+
+            if(row[i] == 1 || col[j] == 1) {
+                a[i][j] = 0;
+            }
+        }
+    }
+
+    // Print result
+    printf("Result matrix:\n");
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
