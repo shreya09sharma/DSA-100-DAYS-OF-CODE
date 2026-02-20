@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main() {
+
+    int n;
+
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+
+    int a[n], left[n], right[n], result[n];
+
+    printf("Enter elements:\n");
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    // Left product
+    left[0] = 1;
+    for(int i = 1; i < n; i++) {
+        left[i] = left[i-1] * a[i-1];
+    }
+
+    // Right product
+    right[n-1] = 1;
+    for(int i = n-2; i >= 0; i--) {
+        right[i] = right[i+1] * a[i+1];
+    }
+
+    // Result
+    for(int i = 0; i < n; i++) {
+        result[i] = left[i] * right[i];
+    }
+
+    // Print result
+    printf("Product Array:\n");
+    for(int i = 0; i < n; i++) {
+        printf("%d ", result[i]);
+    }
+
+    return 0;
+}
