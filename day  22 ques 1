@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Create new node
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Count nodes
+int countNodes(struct Node* head) {
+    int count = 0;
+    struct Node* temp = head;
+
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+
+    return count;
+}
+
+// Traverse list
+void traverse(struct Node* head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* temp = NULL;
+
+    // Example: 10 -> 20 -> 30 -> 40
+    int arr[] = {10, 20, 30, 40};
+    int n = 4;
+
+    for (int i = 0; i < n; i++) {
+        struct Node* newNode = createNode(arr[i]);
+
+        if (head == NULL) {
+            head = newNode;
+        } else {
+            temp = head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = newNode;
+        }
+    }
+
+    printf("Linked List: ");
+    traverse(head);
+
+    int total = countNodes(head);
+    printf("Total number of nodes = %d\n", total);
+
+    return 0;
+}
