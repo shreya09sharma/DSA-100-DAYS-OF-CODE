@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+
+struct Node* findMiddle(struct Node* head) {
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;       
+        fast = fast->next->next;  
+    }
+
+    return slow;
+}
+
+
+void traverse(struct Node* head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* temp = NULL;
+
+    
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = 5;
+
+    for (int i = 0; i < n; i++) {
+        struct Node* newNode = createNode(arr[i]);
+
+        if (head == NULL) {
+            head = newNode;
+        } else {
+            temp = head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = newNode;
+        }
+    }
+
+    printf("Linked List: ");
+    traverse(head);
+
+    struct Node* mid = findMiddle(head);
+    printf("Middle node is: %d\n", mid->data);
+
+    return 0;
+}
